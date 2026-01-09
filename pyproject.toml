@@ -1,0 +1,24 @@
+[project]
+name = "stream-ingest"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "eapasubscriptions01@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "grpcio>=1.76.0",
+    "grpcio-tools>=1.76.0",
+    "typer>=0.9.0",
+]
+
+[project.scripts]
+stream-ingest = "stream_ingest:main"
+push-message = "stream_ingest.producer:run"
+pull-message = "stream_ingest.consumer:app"
+broker-server = "stream_ingest.broker:serve"
+
+[build-system]
+requires = ["uv_build>=0.9.5,<0.10.0"]
+build-backend = "uv_build"

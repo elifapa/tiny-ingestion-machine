@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.helloworld";
+// option java_outer_classname = "HelloWorldProto";
+// option objc_class_prefix = "HLW";
+
+package ingestion;
+
+// The Broker service definition.
+service Broker {
+  // Pulls a message from the broker. Used by Consumer.
+  rpc PullMessage (PullRequest) returns (stream PullResponse) {}
+  // Pushes a new message to the broker. Used by Producer.
+  rpc PushMessage (PushRequest) returns (PushResponse) {}
+}
+
+// The request for PushMessage action, containing the event message.
+message PushRequest {
+  string id = 1;
+  string payload = 2;
+  int64 timestamp = 3;
+}
+// The response for PushMessage action, containing the success status.
+message PushResponse {
+  bool success = 1;
+  string message = 2;
+}
+// The request for PullMessage action, containing the number of requested messages.
+message PullRequest {
+//   int32 offset = 1;
+  int32 number_of_messages = 1;
+}
+// The response for PullMessage action, containing the event message.
+message PullResponse {
+  string id = 1;
+  string payload = 2;
+  int64 timestamp = 3;
+}
