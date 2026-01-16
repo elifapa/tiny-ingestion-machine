@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fingestion.proto\x12\tingestion\"1\n\x0bPushRequest\x12\x0f\n\x07payload\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"0\n\x0cPushResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\")\n\x0bPullRequest\x12\x1a\n\x12number_of_messages\x18\x01 \x01(\x05\">\n\x0cPullResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x32\x8e\x01\n\x06\x42roker\x12\x42\n\x0bPullMessage\x12\x16.ingestion.PullRequest\x1a\x17.ingestion.PullResponse\"\x00\x30\x01\x12@\n\x0bPushMessage\x12\x16.ingestion.PushRequest\x1a\x17.ingestion.PushResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fingestion.proto\x12\tingestion\"[\n\x0bPushRequest\x12\x12\n\ntopic_name\x18\x01 \x01(\t\x12\x14\n\x0cpartition_id\x18\x02 \x01(\x05\x12\x0f\n\x07payload\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\"0\n\x0cPushResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"=\n\x0bPullRequest\x12\x12\n\ntopic_name\x18\x01 \x01(\t\x12\x1a\n\x12number_of_messages\x18\x02 \x01(\x05\"R\n\x0cPullResponse\x12\x12\n\ntopic_name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0f\n\x07payload\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\"Z\n\x0f\x41\x64\x64TopicRequest\x12\x12\n\ntopic_name\x18\x01 \x01(\t\x12\x17\n\x0fpartition_count\x18\x02 \x01(\x05\x12\x1a\n\x12replication_factor\x18\x03 \x01(\x05\"4\n\x10\x41\x64\x64TopicResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"^\n\x05Topic\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x17\n\x0fpartition_count\x18\x02 \x01(\x05\x12\x1a\n\x12replication_factor\x18\x03 \x01(\x05\x12\x12\n\ncreated_at\x18\x04 \x01(\x03\"\x13\n\x11ListTopicsRequest\"6\n\x12ListTopicsResponse\x12 \n\x06topics\x18\x01 \x03(\x0b\x32\x10.ingestion.Topic2\xa2\x02\n\x06\x42roker\x12\x42\n\x0bPullMessage\x12\x16.ingestion.PullRequest\x1a\x17.ingestion.PullResponse\"\x00\x30\x01\x12@\n\x0bPushMessage\x12\x16.ingestion.PushRequest\x1a\x17.ingestion.PushResponse\"\x00\x12\x45\n\x08\x41\x64\x64Topic\x12\x1a.ingestion.AddTopicRequest\x1a\x1b.ingestion.AddTopicResponse\"\x00\x12K\n\nListTopics\x12\x1c.ingestion.ListTopicsRequest\x1a\x1d.ingestion.ListTopicsResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,13 +32,23 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ingestion_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_PUSHREQUEST']._serialized_start=30
-  _globals['_PUSHREQUEST']._serialized_end=79
-  _globals['_PUSHRESPONSE']._serialized_start=81
-  _globals['_PUSHRESPONSE']._serialized_end=129
-  _globals['_PULLREQUEST']._serialized_start=131
-  _globals['_PULLREQUEST']._serialized_end=172
-  _globals['_PULLRESPONSE']._serialized_start=174
-  _globals['_PULLRESPONSE']._serialized_end=236
-  _globals['_BROKER']._serialized_start=239
-  _globals['_BROKER']._serialized_end=381
+  _globals['_PUSHREQUEST']._serialized_end=121
+  _globals['_PUSHRESPONSE']._serialized_start=123
+  _globals['_PUSHRESPONSE']._serialized_end=171
+  _globals['_PULLREQUEST']._serialized_start=173
+  _globals['_PULLREQUEST']._serialized_end=234
+  _globals['_PULLRESPONSE']._serialized_start=236
+  _globals['_PULLRESPONSE']._serialized_end=318
+  _globals['_ADDTOPICREQUEST']._serialized_start=320
+  _globals['_ADDTOPICREQUEST']._serialized_end=410
+  _globals['_ADDTOPICRESPONSE']._serialized_start=412
+  _globals['_ADDTOPICRESPONSE']._serialized_end=464
+  _globals['_TOPIC']._serialized_start=466
+  _globals['_TOPIC']._serialized_end=560
+  _globals['_LISTTOPICSREQUEST']._serialized_start=562
+  _globals['_LISTTOPICSREQUEST']._serialized_end=581
+  _globals['_LISTTOPICSRESPONSE']._serialized_start=583
+  _globals['_LISTTOPICSRESPONSE']._serialized_end=637
+  _globals['_BROKER']._serialized_start=640
+  _globals['_BROKER']._serialized_end=930
 # @@protoc_insertion_point(module_scope)

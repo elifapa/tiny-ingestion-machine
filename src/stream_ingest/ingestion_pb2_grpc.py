@@ -45,6 +45,16 @@ class BrokerStub(object):
                 request_serializer=ingestion__pb2.PushRequest.SerializeToString,
                 response_deserializer=ingestion__pb2.PushResponse.FromString,
                 _registered_method=True)
+        self.AddTopic = channel.unary_unary(
+                '/ingestion.Broker/AddTopic',
+                request_serializer=ingestion__pb2.AddTopicRequest.SerializeToString,
+                response_deserializer=ingestion__pb2.AddTopicResponse.FromString,
+                _registered_method=True)
+        self.ListTopics = channel.unary_unary(
+                '/ingestion.Broker/ListTopics',
+                request_serializer=ingestion__pb2.ListTopicsRequest.SerializeToString,
+                response_deserializer=ingestion__pb2.ListTopicsResponse.FromString,
+                _registered_method=True)
 
 
 class BrokerServicer(object):
@@ -65,6 +75,19 @@ class BrokerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddTopic(self, request, context):
+        """Adds topic to the broker. Used by Admin.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTopics(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BrokerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -77,6 +100,16 @@ def add_BrokerServicer_to_server(servicer, server):
                     servicer.PushMessage,
                     request_deserializer=ingestion__pb2.PushRequest.FromString,
                     response_serializer=ingestion__pb2.PushResponse.SerializeToString,
+            ),
+            'AddTopic': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddTopic,
+                    request_deserializer=ingestion__pb2.AddTopicRequest.FromString,
+                    response_serializer=ingestion__pb2.AddTopicResponse.SerializeToString,
+            ),
+            'ListTopics': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTopics,
+                    request_deserializer=ingestion__pb2.ListTopicsRequest.FromString,
+                    response_serializer=ingestion__pb2.ListTopicsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -134,6 +167,60 @@ class Broker(object):
             '/ingestion.Broker/PushMessage',
             ingestion__pb2.PushRequest.SerializeToString,
             ingestion__pb2.PushResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AddTopic(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ingestion.Broker/AddTopic',
+            ingestion__pb2.AddTopicRequest.SerializeToString,
+            ingestion__pb2.AddTopicResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListTopics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ingestion.Broker/ListTopics',
+            ingestion__pb2.ListTopicsRequest.SerializeToString,
+            ingestion__pb2.ListTopicsResponse.FromString,
             options,
             channel_credentials,
             insecure,

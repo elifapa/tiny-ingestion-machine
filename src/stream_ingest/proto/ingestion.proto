@@ -13,12 +13,17 @@ service Broker {
   rpc PullMessage (PullRequest) returns (stream PullResponse) {}
   // Pushes a new message to the broker. Used by Producer.
   rpc PushMessage (PushRequest) returns (PushResponse) {}
+  // Adds topic to the broker. Used by Admin.
+  rpc AddTopic (AddTopicRequest) returns (AddTopicResponse) {}
+  rpc ListTopics (ListTopicsRequest) returns (ListTopicsResponse) {}
 }
 
 // The request for PushMessage action, containing the event message.
 message PushRequest {
-  string payload = 1;
-  int64 timestamp = 2;
+  string topic_name = 1;
+  int32 partition_id = 2;     // Optional
+  string payload = 3;
+  int64 timestamp = 4;
 }
 // The response for PushMessage action, containing the success status.
 message PushResponse {
@@ -28,11 +33,38 @@ message PushResponse {
 // The request for PullMessage action, containing the number of requested messages.
 message PullRequest {
 //   int32 offset = 1;
-  int32 number_of_messages = 1;
+  string topic_name = 1;
+  int32 number_of_messages = 2;
 }
 // The response for PullMessage action, containing the event message.
 message PullResponse {
-  string id = 1;
-  string payload = 2;
-  int64 timestamp = 3;
+  string topic_name = 1;
+  string id = 2;
+  string payload = 3;
+  int64 timestamp = 4;
+}
+// The request for AddTopic action, containing the topic name.
+message AddTopicRequest {
+  string topic_name = 1;
+  int32 partition_count = 2;
+  int32 replication_factor = 3;
+}
+// The response for AddTopic action, containing the success status.
+message AddTopicResponse {
+  bool success = 1;
+  string message = 2;
+}
+// Topic metadata.
+message Topic {
+  string name = 1;
+  int32 partition_count = 2;
+  int32 replication_factor = 3;
+  int64 created_at = 4;
+}
+// The request for ListTopics action.
+message ListTopicsRequest {
+}
+// The response for ListTopics action, containing the topics.
+message ListTopicsResponse {
+  repeated Topic topics = 1;
 }
