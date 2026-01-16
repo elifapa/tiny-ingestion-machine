@@ -15,7 +15,7 @@ dependencies = [
 
 [project.scripts]
 stream-ingest = "stream_ingest:main"
-push-message = "stream_ingest.producer:run"
+push-message = "stream_ingest.producer:app"
 pull-message = "stream_ingest.consumer:app"
 broker-server = "stream_ingest.broker:serve"
 

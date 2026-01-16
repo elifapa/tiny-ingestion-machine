@@ -1,0 +1,6 @@
+version: "3"
+
+tasks:
+  proto:generate:
+    cmds:
+      - "cd src/stream_ingest && uv run python -m grpc_tools.protoc -I./proto --python_out=. --pyi_out=. --grpc_python_out=. ./proto/ingestion.proto"

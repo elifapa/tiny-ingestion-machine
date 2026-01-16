@@ -5,24 +5,45 @@ import grpc
 import stream_ingest.ingestion_pb2_grpc as ingestion_pb2_grpc
 import stream_ingest.ingestion_pb2 as ingestion_pb2
 from datetime import datetime
+import queue
+import uuid
 
 logger = logging.getLogger(__name__)
 
 class Broker(ingestion_pb2_grpc.BrokerServicer):
 
+    def __init__(self):
+        self.message_queue = queue.Queue()
+
     def PullMessage(self, request, context):
-        # Implement the logic to pull messages from the broker
-        for i in range(request.number_of_messages):
-            response = ingestion_pb2.PullResponse(
-                id=f"msg-{i}",
-                payload=f"Payload for message {i}",
-                timestamp=int(datetime.now().timestamp())
-            )
-            yield response
+        # Pull messages from the queue in order
+        pulled = 0
+        while pulled < request.number_of_messages:
+            try:
+                message = self.message_queue.get(timeout=1)
+                logger.info(f"Sent message with ID: {message['id']} and payload: {message['payload']}")
+
+                response = ingestion_pb2.PullResponse(
+                    id=message['id'],
+                    payload=message['payload'],
+                    timestamp=message['timestamp']
+                )
+                yield response
+                pulled += 1
+            except queue.Empty:
+                logger.warning(f"Queue is empty, requested {request.number_of_messages} but only {pulled} messages available")
+                break
 
     def PushMessage(self, request, context):
-        # Implement the logic to push messages to the broker
-        logger.info(f"Received message with ID: {request.id} and payload: {request.payload}")
+        # Store the message in the queue with a generated UUID
+        message_id = str(uuid.uuid4())
+        message = {
+            'id': message_id,
+            'payload': request.payload,
+            'timestamp': request.timestamp
+        }
+        self.message_queue.put(message)
+        logger.info(f"Received message with ID: {message_id} and payload: {request.payload}")
         response = ingestion_pb2.PushResponse(
             success=True,
             message="Message pushed successfully"

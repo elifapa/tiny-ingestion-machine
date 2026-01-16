@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fingestion.proto\x12\tingestion\"=\n\x0bPushRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\"0\n\x0cPushResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\")\n\x0bPullRequest\x12\x1a\n\x12number_of_messages\x18\x01 \x01(\x05\">\n\x0cPullResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x32\x8e\x01\n\x06\x42roker\x12\x42\n\x0bPullMessage\x12\x16.ingestion.PullRequest\x1a\x17.ingestion.PullResponse\"\x00\x30\x01\x12@\n\x0bPushMessage\x12\x16.ingestion.PushRequest\x1a\x17.ingestion.PushResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fingestion.proto\x12\tingestion\"1\n\x0bPushRequest\x12\x0f\n\x07payload\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"0\n\x0cPushResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\")\n\x0bPullRequest\x12\x1a\n\x12number_of_messages\x18\x01 \x01(\x05\">\n\x0cPullResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x32\x8e\x01\n\x06\x42roker\x12\x42\n\x0bPullMessage\x12\x16.ingestion.PullRequest\x1a\x17.ingestion.PullResponse\"\x00\x30\x01\x12@\n\x0bPushMessage\x12\x16.ingestion.PushRequest\x1a\x17.ingestion.PushResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,13 +32,13 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ingestion_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_PUSHREQUEST']._serialized_start=30
-  _globals['_PUSHREQUEST']._serialized_end=91
-  _globals['_PUSHRESPONSE']._serialized_start=93
-  _globals['_PUSHRESPONSE']._serialized_end=141
-  _globals['_PULLREQUEST']._serialized_start=143
-  _globals['_PULLREQUEST']._serialized_end=184
-  _globals['_PULLRESPONSE']._serialized_start=186
-  _globals['_PULLRESPONSE']._serialized_end=248
-  _globals['_BROKER']._serialized_start=251
-  _globals['_BROKER']._serialized_end=393
+  _globals['_PUSHREQUEST']._serialized_end=79
+  _globals['_PUSHRESPONSE']._serialized_start=81
+  _globals['_PUSHRESPONSE']._serialized_end=129
+  _globals['_PULLREQUEST']._serialized_start=131
+  _globals['_PULLREQUEST']._serialized_end=172
+  _globals['_PULLRESPONSE']._serialized_start=174
+  _globals['_PULLRESPONSE']._serialized_end=236
+  _globals['_BROKER']._serialized_start=239
+  _globals['_BROKER']._serialized_end=381
 # @@protoc_insertion_point(module_scope)

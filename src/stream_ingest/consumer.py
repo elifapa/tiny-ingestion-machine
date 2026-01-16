@@ -26,9 +26,13 @@ def main(number_of_messages: int = typer.Argument(1, help="Number of messages to
     try:
         stub = ingestion_pb2_grpc.BrokerStub(channel)
         request = ingestion_pb2.PullRequest(number_of_messages=number_of_messages)
-
-        for response in stub.PullMessage(request):
-            logger.info(f"Broker client Consumer received message:\n {response}")
+        responses = list(stub.PullMessage(request))
+        
+        if len(responses) == 0:
+            logger.info("No messages received from Broker.")
+        else:
+            for r in responses:
+                logger.info(f"Consumer received:\n {r}")
     finally:
         channel.close()
 

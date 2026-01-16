@@ -17,9 +17,8 @@ service Broker {
 
 // The request for PushMessage action, containing the event message.
 message PushRequest {
-  string id = 1;
-  string payload = 2;
-  int64 timestamp = 3;
+  string payload = 1;
+  int64 timestamp = 2;
 }
 // The response for PushMessage action, containing the success status.
 message PushResponse {
